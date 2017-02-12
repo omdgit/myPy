@@ -37,10 +37,10 @@ df.info()
 df.head()
 
 # proc format equivalent
-bins = [0, 1, 2, 3, 17]
-pregnancies = ['None', '1', '2', '>2']
+bins = [0, 1, 2, 4, 7, 17]
+pregnancies = ['None', '1', '2-3', '4-6', '>6']
 df['pregnancies'] = pd.cut(df['times_pregnant'], bins, 
-                             labels=pregnancies, right=False)
+                           labels=pregnancies, right=False)
 df[['times_pregnant', 'pregnancies']].head()
 df.groupby('pregnancies').size()
 
@@ -54,3 +54,4 @@ aggregations = OrderedDict([
 ])
 
 df.groupby('pregnancies')['plasma_clucose_conc'].agg(aggregations)
+
