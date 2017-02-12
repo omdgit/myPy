@@ -11,6 +11,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from urllib.request import urlopen
+from collections import OrderedDict
 
 print("Python version: %s" % sys.version)
 print("Pandas version: %s" % pd.__version__)
@@ -43,3 +44,13 @@ df['pregnancies'] = pd.cut(df['times_pregnant'], bins,
 df[['times_pregnant', 'pregnancies']].head()
 df.groupby('pregnancies').size()
 
+aggregations = OrderedDict([
+    ('Minimum', 'min'),
+    ('Maximum', 'max'),
+    ('Mean', 'mean'),
+    ('StDev', 'std'),
+    ('Median', 'median'),
+    ('N', 'count')
+])
+
+df.groupby('pregnancies')['plasma_clucose_conc'].agg(aggregations)
